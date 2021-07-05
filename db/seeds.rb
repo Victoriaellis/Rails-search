@@ -5,3 +5,35 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'open-uri'
+require 'nokogiri'
+Article.destroy_all
+
+
+
+url = 'https://newsapi.org/v2/everything?q=apple&from=2021-07-05&sortBy=popularity&apiKey=e14b5d5db07c4a3a9dccd8d865071112'
+news_serialized = URI.open(url).read
+news = JSON.parse(news_serialized)
+news_list = news["articles"]
+# puts movie_list
+
+
+
+news_list.each do |news|
+  url = news["url"]
+  html_file = URI.open(url).read
+  html_doc = Nokogiri::HTML(html_file)
+
+  html_doc.search('article').each do |element|
+    # puts element.text.strip
+    wpm = 200
+    words = element.text.split(/\s+/).length
+    @time = words / wpm
+  end
+   Article.create!(title: news["title"], body: news["content"], url: news["url"], reading_time: @time.to_s)
+   puts "created!"
+end
+
+
+
