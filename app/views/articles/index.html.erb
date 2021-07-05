@@ -13,7 +13,7 @@
   <% @articles.each do |article| %>
     <li>
       <h1><%= link_to article.title, article_path(article) %> </h1>
-      <a href="<%= article.url %>"><%= article.url %></a>
+      <a href="<%= article.url %>"><%= article.url.scan(/^\S{25}/)[0] %></a>
       <% if article.reading_time.to_i > 1 %>
         <p><i>Reading time: <%= article.reading_time %> minutes</i></p>
       <% else %>
