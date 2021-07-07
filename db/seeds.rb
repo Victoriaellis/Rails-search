@@ -32,7 +32,7 @@ news_list.each do |news|
     words = element.text.split(/\s+/).length
     @time = words / wpm
   end
-   Article.create!(title: news["title"], body: body, url: news["url"], reading_time: @time.to_s)
+   Article.create!(title: news["title"], body: body, url: news["url"], reading_time: @time.to_s, short_url: news["url"].match(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/)[3])
    puts "created!"
 end
 

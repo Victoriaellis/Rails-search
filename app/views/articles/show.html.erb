@@ -8,8 +8,7 @@
   </ul>
 
 
-
-  <a href="<%= @article.url %>"><%= @article.url.scan(/^\S{25}/)[0] %></a>
+  <a href="<%= @article.url %>"><%= @article.short_url %></a>
   <% if @article.reading_time.to_i > 1 %>
       <p><i>Reading time: <%= @article.reading_time %> minutes</i></p>
     <% else %>
