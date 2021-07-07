@@ -24,14 +24,15 @@ news_list.each do |news|
   url = news["url"]
   html_file = URI.open(url).read
   html_doc = Nokogiri::HTML(html_file)
+  body = html_doc.search('h1').text + "," + html_doc.search('h2').text + "," + html_doc.search('h3').text
 
   html_doc.search('article').each do |element|
     # puts element.text.strip
-    wpm = 200
+    wpm = 225
     words = element.text.split(/\s+/).length
     @time = words / wpm
   end
-   Article.create!(title: news["title"], body: news["content"], url: news["url"], reading_time: @time.to_s)
+   Article.create!(title: news["title"], body: body, url: news["url"], reading_time: @time.to_s)
    puts "created!"
 end
 

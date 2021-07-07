@@ -1,6 +1,14 @@
 <div class="container mt-3">
   <h1><%= @article.title %></h1>
-  <p><%= @article.body %></p>
+
+  <ul>
+  <% @article.body.split(",").each do |word| %>
+      <li><%= word %></li>
+  <% end %>
+  </ul>
+
+
+
   <a href="<%= @article.url %>"><%= @article.url.scan(/^\S{25}/)[0] %></a>
   <% if @article.reading_time.to_i > 1 %>
       <p><i>Reading time: <%= @article.reading_time %> minutes</i></p>

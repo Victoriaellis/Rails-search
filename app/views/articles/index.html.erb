@@ -8,7 +8,7 @@
     %>
     <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
-
+<a><%= link_to "Add an article", new_article_path, class:"btn btn-primary mt-2" %></a>
   <ul>
   <% @articles.each do |article| %>
     <li>
