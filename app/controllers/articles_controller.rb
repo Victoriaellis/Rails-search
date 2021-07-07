@@ -27,8 +27,8 @@ class ArticlesController < ApplicationController
       wpm = 225
       words = element.text.split(/\s+/).length
       @article.reading_time = (words / wpm).to_s
-      @article.short_url = @article.url.match(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/)[3]
     end
+    @article.short_url = (@article.url.match(/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/))[3]
     if @article.save
       redirect_to articles_path
     else
